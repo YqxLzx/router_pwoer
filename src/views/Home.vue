@@ -1,18 +1,37 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="home">
+        <login-main :titleAndText="text" ></login-main>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import loginMain from '../components/login/loginMain'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+    name:'home',
+    data(){
+        return {
+          text:{
+              title:'WelCome to here',
+              name:'账号',
+              password:'密码'
+          }  
+        }
+    },
+    components:{
+        loginMain
+    }
 }
 </script>
+
+<style>
+#home{
+    height: 100%;
+    background-color: black;
+    position: relative;
+}
+#home #login-main{
+    left:50%;
+    transform:translate(-50%,50%);
+}
+
+</style>
