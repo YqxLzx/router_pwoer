@@ -8,6 +8,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 axios.defaults.baseURL = 'http://127.0.0.1:3000/'
 axios.defaults.withCredentials = true
+
 /*
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
@@ -15,6 +16,9 @@ axios.interceptors.request.use(config => {
   return config;
 })
 */
+
+Vue.prototype.$EventBus = new Vue()
+
 new Vue({
   router,
   store,

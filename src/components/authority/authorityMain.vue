@@ -3,7 +3,7 @@
         <div class="left-box">
             <h2>管理列表</h2>
             <div class="pwoer-list-box">
-                <p v-for="(item,index) in text" :key="item.id"
+                <p v-for="(item,index) in text2" :key="item.id"
                    @click="goChildRouter(index)"
                    :class="{actvieItem:index === activeItemIndex}">
                     {{item.name}}
@@ -27,8 +27,15 @@ export default {
                 {id:1,name:'用户权限',path:'/user'},
                 {id:2,name:'公共权限',path:'/publicPwoer'}
             ],
-            activeItemIndex:0
+            activeItemIndex:0,
+            text2:''
         }
+    },
+    mounted(){
+        this.$EventBus.$on('showList',res => {
+            this.text2 = res
+            console.log(this.text2)
+        })
     },
     methods:{
         goChildRouter(index){

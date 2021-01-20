@@ -35,6 +35,7 @@
 </template>
 
 <script>
+//import Vue from 'vue'
 export default {
     name:'login-main',
     data(){
@@ -42,6 +43,9 @@ export default {
             name:'',
             password:'',
         }
+    },
+    computed:{
+        
     },
     props:{
         titleAndText:{
@@ -51,21 +55,20 @@ export default {
     directives: {
         focus: {
             inserted: function (el) {
-            el.focus()
+                el.focus()
             }
         }
     },
     methods:{
-        //async 
-        clickConfigBtn(e){
+        async clickConfigBtn(e){
             e.preventDefault()
             this.$router.push({path:'authority'})
-            /*let {data:user} = await this.$http.post('/login',{
+            let {data:user} = await this.$http.post('/login',{
                 name:this.name,
                 password:this.password
-            }) */
-            //localStorage.setItem("key", user);
-            //console.log(user.data)
+            }) 
+            localStorage.setItem("key", user);
+            this.$EventBus.$emit('showList',user.showList)
         }
     }
 }

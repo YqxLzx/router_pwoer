@@ -8,6 +8,8 @@ const publicPwoer = () => import('../components/authority/someAuthority/publicPw
 
 Vue.use(VueRouter)
 
+
+
 const routes = [
   {
     name:'home',
@@ -56,6 +58,8 @@ const routes = [
     ]
   }
 ]
+
+
 
 const router = new VueRouter({
   mode: 'history',
