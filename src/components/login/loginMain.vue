@@ -47,6 +47,7 @@ export default {
     computed:{
         
     },
+
     props:{
         titleAndText:{
             type:Object
@@ -62,12 +63,14 @@ export default {
     methods:{
         async clickConfigBtn(e){
             e.preventDefault()
+            e.stopPropagation()
             this.$router.push({path:'authority'})
             let {data:user} = await this.$http.post('/login',{
                 name:this.name,
                 password:this.password
-            }) 
-            localStorage.setItem("key", user);
+            })
+            sessionStorage .setItem("key",JSON.stringify(user));
+            console.log(user)
             this.$EventBus.$emit('showList',user.showList)
         }
     }

@@ -6,7 +6,7 @@
                 <p v-for="(item,index) in text2" :key="item.id"
                    @click="goChildRouter(index)"
                    :class="{actvieItem:index === activeItemIndex}">
-                    {{item.name}}
+                    {{item.title}}
                 </p> 
             </div>
         </div>
@@ -22,31 +22,34 @@ export default {
     data(){
         return {
             //模拟后端数据
-            text:[
+            /*text:[
                 {id:0,name:'管理权限',path:'/admin'},
                 {id:1,name:'用户权限',path:'/user'},
                 {id:2,name:'公共权限',path:'/publicPwoer'}
-            ],
+            ],*/
             activeItemIndex:0,
             text2:''
         }
+    },
+    created(){
+
     },
     mounted(){
         this.$EventBus.$on('showList',res => {
             this.text2 = res
             console.log(this.text2)
         })
+        //this.goChildRouter(0)
     },
     methods:{
         goChildRouter(index){
-            //this.activeItemIndex = index          
-            this.$router.replace({path:this.text[index].path})              
+            this.activeItemIndex = index
+            //console.log(this.text2)          
+            this.$router.replace({path:this.text2[index].path})              
         },
     },
     watch:{
-        $route(to){
-            this.activeItemIndex = to.meta.index 
-        }
+
     }
 
 }

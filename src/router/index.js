@@ -8,22 +8,40 @@ const publicPwoer = () => import('../components/authority/someAuthority/publicPw
 
 Vue.use(VueRouter)
 
-
-
 const routes = [
-  {
-    name:'home',
-    path:'/',
-    component:home,
-    meta:{
-      title:'home'
-    }
-  },
   {
     name:'authority',
     path:'/authority',
     component:authority,
-    redirect:'/admin',
+    redirect:to => {
+      console.log(to)
+      let key = sessionStorage.getItem('key')
+      let user = JSON.parse(key)    
+      switch(user.code){
+        case '000001':{
+          return {
+            name:'admin',
+            path:'/admin',
+            component:admin,
+            meta:{
+              title:'admin',
+            }
+          }
+          //break
+        }
+        case '000002':{
+          return  {
+            name:'user',
+            path:'/user',
+            component:user,
+            meta:{
+              title:'user',
+            },
+          }
+        }
+      }
+      //console.log(key)
+    },
     meta:{
       title:'authority'
     },
@@ -34,7 +52,6 @@ const routes = [
         component:admin,
         meta:{
           title:'admin',
-          index:0
         },
       },
       {
@@ -43,7 +60,6 @@ const routes = [
         component:user,
         meta:{
           title:'user',
-          index:1
         },
       },
       {
@@ -52,10 +68,17 @@ const routes = [
         component:publicPwoer,
         meta:{
           title:'publicPwoer',
-          index:2
         },
       }
     ]
+  },
+  {
+    name:'home',
+    path:'/',
+    component:home,
+    meta:{
+      title:'home'
+    }
   }
 ]
 
